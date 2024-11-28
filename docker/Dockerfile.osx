@@ -38,12 +38,12 @@ RUN chmod -R 777 /usr/local/rustup
 WORKDIR /code
 
 # copy build scripts
-COPY build/*.sh /usr/local/bin/
+COPY docker/*.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh
 
 # add config cargo
 RUN mkdir /.cargo
 RUN chmod +rx /.cargo
-COPY build/cargo-config /.cargo/config
+COPY docker/cargo-config /.cargo/config
 
 CMD ["bash", "-c", "echo 'Argument missing. Pass one build script (e.g. build_osx.sh) to docker run' && exit 1"]

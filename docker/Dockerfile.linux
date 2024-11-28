@@ -25,11 +25,11 @@ RUN chmod -R 777 /usr/local/cargo
 WORKDIR /code
 
 # copy build scripts
-COPY build/*.sh /usr/local/bin/
+COPY docker/*.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh
 
 RUN mkdir /.cargo
 RUN chmod +rx /.cargo
-COPY build/cargo-config /.cargo/config
+COPY docker/cargo-config /.cargo/config
 
-CMD ["bash", "-c", "echo 'Argument missing. Pass one build script (e.g. build_linux.sh) to docker run' && exit 1"]
+CMD ["bash", "-c", "echo 'Argument missing. Pass one docker script (e.g. docker_linux.sh) to build run' && exit 1"]

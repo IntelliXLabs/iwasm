@@ -27,11 +27,11 @@ WORKDIR /code
 RUN rustup target add x86_64-unknown-linux-musl
 
 # copy build scripts
-COPY build/*.sh /usr/local/bin/
+COPY docker/*.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh
 
 RUN mkdir /.cargo
 RUN chmod +rx /.cargo
-COPY build/cargo-config /.cargo/config
+COPY docker/cargo-config /.cargo/config
 
 CMD ["bash", "-c", "echo 'Argument missing. Pass one build script (e.g. build_alpine.sh) to docker run' && exit 1"]

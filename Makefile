@@ -6,13 +6,13 @@ USER_ID := $(shell id -u)
 USER_GROUP := $(shell id -g)
 
 docker-image-alpine:
-	docker build . -t $(DOCKER_IMAGE):$(DOCKER_TAG)-alpine -f build/Dockerfile.alpine
+	docker build . -t $(DOCKER_IMAGE):$(DOCKER_TAG)-alpine -f docker/Dockerfile.alpine
 
 docker-image-linux:
-	docker build . -t $(DOCKER_IMAGE):$(DOCKER_TAG)-linux -f build/Dockerfile.linux
+	sudo docker build . -t $(DOCKER_IMAGE):$(DOCKER_TAG)-linux -f docker/Dockerfile.linux
 
 docker-image-osx:
-	docker build . -t $(DOCKER_IMAGE):$(DOCKER_TAG)-osx -f build/Dockerfile.osx
+	docker build . -t $(DOCKER_IMAGE):$(DOCKER_TAG)-osx -f docker/Dockerfile.osx
 
 docker-images: 
 	make docker-image-osx 
