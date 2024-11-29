@@ -13,3 +13,10 @@ To run unit test:
 ```bash
 LD_LIBRARY_PATH=target/release go test .
 ```
+
+Compile runtime in docker
+
+```bash
+make docker-image-linux
+make release-linux
+```

@@ -19,6 +19,6 @@ export CXX=o64-clang++
 cargo build --release --target x86_64-apple-darwin
 
 # Create a universal library with both archs
-lipo -output ./../api/lib_iwasm.dylib -create \
-  target/x86_64-apple-darwin/release/deps/lib_iwasm.dylib \
-  target/aarch64-apple-darwin/release/deps/lib_iwasm.dylib
+lipo -output ./../api/libruntime.dylib -create \
+  target/x86_64-apple-darwin/release/deps/libruntime.dylib \
+  target/aarch64-apple-darwin/release/deps/libruntime.dylib
