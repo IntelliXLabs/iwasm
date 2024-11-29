@@ -1,4 +1,4 @@
-package example
+package api
 
 import (
 	"bytes"
@@ -7,6 +7,7 @@ import (
 	"testing"
 )
 
+// shell: LD_LIBRARY_PATH=. go test .
 func TestRuntime(t *testing.T) {
 	runtime := NewRuntime()
 	defer runtime.Dispose()
@@ -14,7 +15,7 @@ func TestRuntime(t *testing.T) {
 		t.Fatalf("failed to create runtime: %v", err)
 	}
 
-	wasmFile := "wasm/processor.wasm"
+	wasmFile := "../wasm/processor.wasm"
 	wasm, err := os.ReadFile(wasmFile)
 	if err != nil {
 		t.Fatalf("failed to read WASM file %s: %v", wasmFile, err)

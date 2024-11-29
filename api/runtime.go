@@ -1,7 +1,8 @@
-package example
+package api
 
 /*
-#cgo LDFLAGS: -Ltarget/release -lruntime
+#cgo LDFLAGS: -L${SRCDIR} -lruntime
+#cgo CFLAGS: -I${SRCDIR}
 #include "runtime.h"
 */
 import "C"
