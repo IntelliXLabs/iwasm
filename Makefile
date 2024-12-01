@@ -11,10 +11,10 @@ build:
 	mkdir -p lib && cp target/release/libruntime* lib/
 
 test: build
-	LD_LIBRARY_PATH=../lib go test ./api
+	LD_LIBRARY_PATH=$(PWD)/lib CGO_LDFLAGS=-L$(PWD)/lib go test ./api
 
 run: build
-	LD_LIBRARY_PATH=lib go run main.go
+	LD_LIBRARY_PATH=$(PWD)/lib CGO_LDFLAGS=-L$(PWD)/lib go run main.go
 
 docker-image-alpine:
 	docker build . -t $(DOCKER_IMAGE):$(DOCKER_TAG)-alpine -f docker/Dockerfile.alpine
