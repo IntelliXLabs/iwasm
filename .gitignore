@@ -1,6 +1,8 @@
 target/
-lib/*
 .idea/
 .DS_Store/
 .vscode/
 .env
+
+lib/*
+!lib/runtime.h
