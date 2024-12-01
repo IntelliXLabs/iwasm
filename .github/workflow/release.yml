@@ -24,8 +24,7 @@ jobs:
 
       - name: Build Release
         run: |
-          docker compose -f docker/docker-compose.build.yml build
-          docker run --rm -v ./lib:/root/lib iwasm:latest bash -c "cp -r /app/iwasm/lib/* /root/lib/"
+          docker compose -f docker/docker-compose.build.yml up --build
 
       - name: Create Archive
         run: |

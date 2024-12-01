@@ -7,8 +7,7 @@ USER_GROUP := $(shell id -g)
 
 # use cargo to build and move the so to lib
 build:
-	cargo build --release
-	mkdir -p lib && cp target/release/libruntime* lib/
+	cargo build --release && cp target/release/libruntime* lib/
 
 test: build
 	LD_LIBRARY_PATH=$(PWD)/lib CGO_LDFLAGS=-L$(PWD)/lib go test ./api
