@@ -7,5 +7,5 @@ fn main() {
         .with_crate(crate_dir)
         .generate()
         .expect("generating bindings")
-        .write_to_file("runtime.h");
+        .write_to_file("lib/runtime.h");
 }

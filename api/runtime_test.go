@@ -15,7 +15,7 @@ func TestRuntime(t *testing.T) {
 		t.Fatalf("failed to create runtime: %v", err)
 	}
 
-	wasmFile := "../wasm/processor.wasm"
+	wasmFile := "../testutils/data/processor.wasm"
 	wasm, err := os.ReadFile(wasmFile)
 	if err != nil {
 		t.Fatalf("failed to read WASM file %s: %v", wasmFile, err)

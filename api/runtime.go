@@ -1,8 +1,8 @@
 package api
 
 /*
-#cgo LDFLAGS: -L${SRCDIR} -lruntime
-#cgo CFLAGS: -I${SRCDIR}
+#cgo LDFLAGS: -L${SRCDIR}/../lib -lruntime
+#cgo CFLAGS: -I${SRCDIR}/../lib
 #include "runtime.h"
 */
 import "C"

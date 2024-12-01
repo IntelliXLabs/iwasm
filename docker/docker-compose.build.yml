@@ -1,0 +1,7 @@
+services:
+  iwasm:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      tags:
+        - iwasm

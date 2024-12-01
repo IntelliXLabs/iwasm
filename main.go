@@ -3,12 +3,13 @@ package main
 import (
 	"bytes"
 	"encoding/binary"
-	"github.com/IntelliXLabs/iwasm/api"
 	"log"
 	"os"
+
+	"github.com/IntelliXLabs/iwasm/api"
 )
 
-// LD_LIBRARY_PATH=api go run main.go
+// LD_LIBRARY_PATH=lib go run main.go
 func main() {
 	runtime := api.NewRuntime()
 	defer runtime.Dispose()
@@ -16,7 +17,7 @@ func main() {
 		log.Fatalf("failed to create runtime: %v", err)
 	}
 
-	wasmFile := "wasm/processor.wasm"
+	wasmFile := "testutils/data/processor.wasm"
 	wasm, err := os.ReadFile(wasmFile)
 	if err != nil {
 		log.Fatalf("failed to read WASM file %s: %v", wasmFile, err)
