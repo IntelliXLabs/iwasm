@@ -15,7 +15,8 @@ fn main() {
     let lib_name = get_dylib_name();
     let source = PathBuf::from("target/release").join(&lib_name);
     let target = PathBuf::from("lib").join(&lib_name);
-    fs::copy(source, target).expect("Failed to install library");
+    println!("cargo:warning=Copying library from {:?} to {:?}", source, target);
+    fs::copy(&source, &target).expect(&format!("Failed to copy library from {:?} to {:?}", source, target));
 }
 
 fn get_dylib_name() -> String {
