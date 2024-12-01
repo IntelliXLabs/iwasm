@@ -12,6 +12,7 @@ wasmer-compiler-singlepass = "5.0.1"
 wasmer-wasix = "0.31.0"
 
 [lib]
+name = "runtime"
 crate-type = ["cdylib"]
 
 [build-dependencies]
@@ -19,3 +20,6 @@ cbindgen = "0.27.0"
 
 [dev-dependencies]
 serde_json = "1.0.133"
+
+[package.metadata.build-script]
+build-script = true
