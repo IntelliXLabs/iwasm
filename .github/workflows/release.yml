@@ -40,13 +40,13 @@ jobs:
           file: ./Dockerfile
           push: false
           tags: |
-            iwasm:${{ env.TAG }}
+            intellix/iwasm:${{ env.TAG }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
       - name: Build Release
         run: |
-          docker run --rm -v ./lib:/root/lib iwasm:${{ env.TAG }} bash -c "cp -r /app/iwasm/lib/* /root/lib/"
+          docker run --rm -v ./lib:/root/lib intellix/iwasm:${{ env.TAG }} bash -c "cp -r /app/iwasm/lib/* /root/lib/"
 
       - name: Create Archive
         run: |
