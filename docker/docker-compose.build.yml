@@ -3,5 +3,8 @@ services:
     build:
       context: ../
       dockerfile: ./docker/Dockerfile
+      # platforms:
+      #   - linux/amd64
+      #   - linux/arm64
       tags:
         - ${ORG:-intellix}/iwasm:${TAG}
