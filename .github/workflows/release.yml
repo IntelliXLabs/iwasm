@@ -15,6 +15,11 @@ jobs:
   build-and-release:
     name: Build and Release
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform:
+          - linux/amd64
+          # - linux/arm64
 
     steps:
       - uses: actions/checkout@v4
@@ -39,12 +44,15 @@ jobs:
       - name: Create Archive
         run: |
           IMAGE=${{ vars.ORG }}/iwasm:${{ env.TAG }}
-          docker pull $IMAGE
-          docker run --rm -v ./lib:/root/lib $IMAGE bash -c "cp -r /app/iwasm/lib/* /root/lib/"
-          tar -czf libruntime.tar.gz lib/
+          PLATFORM=${{ matrix.platform }}
+          PLATFORM_SUFFIX=${PLATFORM//\//-}
+          LIB_PATH=lib-${PLATFORM_SUFFIX}
+          docker pull --platform $PLATFORM $IMAGE
+          docker run --platform $PLATFORM --rm -v ./${LIB_PATH}:/root/lib $IMAGE bash -c "cp -r /app/iwasm/lib/* /root/lib/"
+          tar -czf libruntime-${PLATFORM_SUFFIX}.tar.gz lib-${PLATFORM_SUFFIX}/
 
       - name: Release
         uses: softprops/action-gh-release@v2.1.0
         with:
           tag_name: ${{ inputs.tag || github.ref_name }}
-          files: libruntime.tar.gz
+          files: libruntime-*.tar.gz
