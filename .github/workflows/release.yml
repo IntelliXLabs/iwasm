@@ -36,14 +36,11 @@ jobs:
             echo "TAG=latest" >> $GITHUB_ENV
           fi
 
-      - name: Build Release
+      - name: Create Archive
         run: |
           IMAGE=${{ vars.ORG }}/iwasm:${{ env.TAG }}
           docker pull $IMAGE
           docker run --rm -v ./lib:/root/lib $IMAGE bash -c "cp -r /app/iwasm/lib/* /root/lib/"
-
-      - name: Create Archive
-        run: |
           tar -czf libruntime.tar.gz lib/
 
       - name: Release
