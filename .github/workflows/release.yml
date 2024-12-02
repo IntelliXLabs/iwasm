@@ -39,6 +39,7 @@ jobs:
           context: ./
           file: ./docker/Dockerfile
           push: false
+          load: true
           tags: |
             intellix/iwasm:${{ env.TAG }}
           cache-from: type=gha
