@@ -53,10 +53,7 @@ jobs:
           tar -czf libruntime.tar.gz lib/
 
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2.1.0
         with:
-          token: ${{ secrets.PAT_GITHUB_SERVICE_ACCT }}
           tag_name: ${{ inputs.tag || github.ref_name }}
           files: libruntime.tar.gz
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
