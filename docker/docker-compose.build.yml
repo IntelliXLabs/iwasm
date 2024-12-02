@@ -4,4 +4,4 @@ services:
       context: ../
       dockerfile: ./docker/Dockerfile
       tags:
-        - iwasm
+        - ${ORG:-intellix}/iwasm:${TAG}
