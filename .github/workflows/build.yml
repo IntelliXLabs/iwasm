@@ -44,23 +44,8 @@ jobs:
         with:
           context: ./
           file: ./docker/Dockerfile
-          push: false
-          load: true
+          push: true
           tags: |
             ${{ vars.ORG }}/iwasm:${{ env.TAG }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-      - name: Build Release
-        run: |
-          docker run --rm -v ./lib:/root/lib ${{ env.ORG }}/iwasm:${{ env.TAG }} bash -c "cp -r /app/iwasm/lib/* /root/lib/"
-
-      - name: Create Archive
-        run: |
-          tar -czf libruntime.tar.gz lib/
-
-      - name: Release
-        uses: softprops/action-gh-release@v2.1.0
-        with:
-          tag_name: ${{ inputs.tag || github.ref_name }}
-          files: libruntime.tar.gz
