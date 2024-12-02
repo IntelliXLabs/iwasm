@@ -22,10 +22,31 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Set Docker Tag
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "TAG=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+          elif [[ $GITHUB_REF == refs/tags/* ]]; then
+            echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          else
+            echo "TAG=latest" >> $GITHUB_ENV
+          fi
+
+      - name: Build With Cache
+        uses: docker/build-push-action@v5
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: false
+          tags: |
+            iwasm:${{ env.TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
       - name: Build Release
         run: |
-          docker compose -f docker/docker-compose.build.yml build
-          docker run --rm -v ./lib:/root/lib iwasm:latest bash -c "cp -r /app/iwasm/lib/* /root/lib/"
+          docker run --rm -v ./lib:/root/lib iwasm:${{ env.TAG }} bash -c "cp -r /app/iwasm/lib/* /root/lib/"
 
       - name: Create Archive
         run: |
