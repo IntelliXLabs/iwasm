@@ -41,6 +41,9 @@ jobs:
             echo "TAG=latest" >> $GITHUB_ENV
           fi
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
       - name: Create Archive
         run: |
           IMAGE=${{ vars.ORG }}/iwasm:${{ env.TAG }}
