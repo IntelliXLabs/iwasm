@@ -19,7 +19,7 @@ jobs:
       matrix:
         platform:
           - linux/amd64
-          # - linux/arm64
+          - linux/arm64
 
     steps:
       - uses: actions/checkout@v4
@@ -40,6 +40,9 @@ jobs:
           else
             echo "TAG=latest" >> $GITHUB_ENV
           fi
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Create Archive
         run: |
